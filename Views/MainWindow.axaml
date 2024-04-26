@@ -22,10 +22,33 @@
         <TextBlock
             Margin="10, 20, 10, 10"
             Text="{Binding Greeting}"
-            FontSize="24"
+            FontSize="34"
             FontWeight="ExtraBold"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"/>
+        <Grid ShowGridLines="True" Margin="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" Grid.Column="0" Margin="20" FontSize="24">Input:</Label>
+            <Label Grid.Row="0" Grid.Column="1" Margin="20" FontSize="24">Output:</Label>
+            
+            <ComboBox Margin="20" Width="200" Grid.Row="1" Grid.Column="0" SelectedIndex="0" MaxDropDownHeight="200">
+                <ComboBoxItem>test</ComboBoxItem>
+                <ComboBoxItem>test</ComboBoxItem>
+                <ComboBoxItem>test</ComboBoxItem>
+                <ComboBoxItem>test</ComboBoxItem>
+                <ComboBoxItem>test</ComboBoxItem>
+                <ComboBoxItem>test</ComboBoxItem>
+                <ComboBoxItem>test</ComboBoxItem>
+                <ComboBoxItem>test</ComboBoxItem>
+            </ComboBox>
+        </Grid>
     </StackPanel>
 
 </Window>
