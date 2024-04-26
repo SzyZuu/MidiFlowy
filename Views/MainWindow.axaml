@@ -6,6 +6,10 @@
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="MidiFlowy.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
+        Height="400"
+        Width="700"
+        CanResize="False"
+        ExtendClientAreaToDecorationsHint="True"
         Icon="/Assets/avalonia-logo.ico"
         Title="MidiFlowy">
 
@@ -13,6 +17,15 @@
         <vm:MainWindowViewModel/>
     </Design.DataContext>
 
-    <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+    
+    <StackPanel>
+        <TextBlock
+            Margin="10, 20, 10, 10"
+            Text="{Binding Greeting}"
+            FontSize="24"
+            FontWeight="ExtraBold"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"/>
+    </StackPanel>
 
 </Window>
