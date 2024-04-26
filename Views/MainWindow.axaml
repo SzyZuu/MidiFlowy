@@ -26,7 +26,7 @@
             FontWeight="ExtraBold"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"/>
-        <Grid ShowGridLines="True" Margin="5">
+        <Grid ShowGridLines="False" Margin="5">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition />
@@ -35,10 +35,10 @@
                 <RowDefinition />
                 <RowDefinition />
             </Grid.RowDefinitions>
-            <Label Grid.Row="0" Grid.Column="0" Margin="20" FontSize="24">Input:</Label>
-            <Label Grid.Row="0" Grid.Column="1" Margin="20" FontSize="24">Output:</Label>
+            <Label Grid.Row="0" Grid.Column="0" Margin="20" FontSize="24" HorizontalAlignment="Center">Input:</Label>
+            <Label Grid.Row="0" Grid.Column="1" Margin="20" FontSize="24" HorizontalAlignment="Center">Output:</Label>
             
-            <ComboBox Margin="20" Width="200" Grid.Row="1" Grid.Column="0" SelectedIndex="0" MaxDropDownHeight="200">
+            <ComboBox Margin="20" Width="200" Grid.Row="1" Grid.Column="0" SelectedIndex="0" MaxDropDownHeight="200" HorizontalAlignment="Center">
                 <ComboBoxItem>test</ComboBoxItem>
                 <ComboBoxItem>test</ComboBoxItem>
                 <ComboBoxItem>test</ComboBoxItem>
