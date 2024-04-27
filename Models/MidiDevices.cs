@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using Melanchall.DryWetMidi.Multimedia;
@@ -7,15 +7,11 @@ namespace MidiFlowy.Models;
 
 public class MidiDevices
 {
-    private List<InputDevice> _inputDevices;
-    private List<OutputDevice> _outputDevices;
+    private List<InputDevice> _inputDevices = new();
+    private List<OutputDevice> _outputDevices = new();
 
-    public MidiDevices()
-    {
-        _inputDevices = new List<InputDevice>();
-        _outputDevices = new List<OutputDevice>();
-    }
-    
+    private InputDevice _selectedDevice;
+
     public IEnumerable<InputDevice> FindAllInputDevices()
     {
         return (IEnumerable<InputDevice>)_inputDevices.ToArray();
@@ -34,5 +30,17 @@ public class MidiDevices
     public void AddOutput(IEnumerable<OutputDevice> outputDevice)
     {
         _outputDevices = outputDevice.ToList();
+    }
+
+    public InputDevice GetSelectedInput()
+    {
+        return _selectedDevice;
+    }
+
+    public void SetInput(InputDevice input)
+    {
+        if(!_inputDevices.Contains(input))
+            throw new ModelException();
+        _selectedDevice = input;
     }
 }
