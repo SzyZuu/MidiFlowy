@@ -1,8 +1,10 @@
-﻿namespace MidiFlowy.Services;
+﻿using MidiFlowy.Interfaces;
 
-public class DryWetMidiService
+namespace MidiFlowy.Services;
+
+public class DryWetMidiService : IMidiDeviceRefresher
 {
-    public void ScanForDevices()
+    public void RefreshAll()
     {
         
     }
