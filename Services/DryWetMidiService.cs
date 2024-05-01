@@ -1,6 +1,8 @@
-﻿namespace MidiFlowy.Services;
+﻿using MidiFlowy.Models;
 
-public class DryWetMidiService
+namespace MidiFlowy.Services;
+
+public class DryWetMidiService(MidiDevices midiDevices)
 {
     
 }
