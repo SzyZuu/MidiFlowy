@@ -1,4 +1,5 @@
-﻿using MidiFlowy.Models;
+﻿using Melanchall.DryWetMidi.Multimedia;
+using MidiFlowy.Models;
 
 namespace MidiFlowy.Services;
 
@@ -11,6 +12,7 @@ public class MidiDeviceRefresherService(MidiDevices midiDevices) : IMidiDeviceRe
 {
     public void RefreshAll()
     {
-        
+        midiDevices.AddInput(InputDevice.GetAll());
+        midiDevices.AddOutput(OutputDevice.GetAll());
     }
 }
