@@ -34,6 +34,11 @@ public class MidiDevices
 
     public InputDevice GetSelectedInput()
     {
+        if (_selectedDevice is null)
+        {
+            _selectedDevice = _inputDevices[0];
+        }
+
         return _selectedDevice;
     }
 
