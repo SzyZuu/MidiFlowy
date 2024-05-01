@@ -10,7 +10,7 @@ public class MidiDevices
     private List<InputDevice> _inputDevices = new();
     private List<OutputDevice> _outputDevices = new();
 
-    private InputDevice _selectedDevice;
+    private InputDevice? _selectedDevice;
 
     public IEnumerable<InputDevice> FindAllInputDevices()
     {
