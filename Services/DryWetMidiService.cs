@@ -2,10 +2,7 @@
 
 namespace MidiFlowy.Services;
 
-public class DryWetMidiService : IMidiDeviceRefresher
+public class DryWetMidiService
 {
-    public void RefreshAll()
-    {
-        
-    }
+
 }
