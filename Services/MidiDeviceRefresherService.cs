@@ -1,4 +1,4 @@
-﻿namespace MidiFlowy.Interfaces;
+﻿namespace MidiFlowy.Services;
 
 public interface IMidiDeviceRefresher
 {
