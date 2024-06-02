@@ -2,6 +2,8 @@ using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 using Microsoft.Extensions.DependencyInjection;
+using MidiFlowy.Models;
+using MidiFlowy.Services;
 using MidiFlowy.ViewModels;
 using MidiFlowy.Views;
 
