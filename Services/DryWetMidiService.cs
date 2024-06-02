@@ -2,7 +2,7 @@
 
 namespace MidiFlowy.Services;
 
-public class DryWetMidiService(MidiDevices midiDevices)
+public class DryWetMidiService()
 {
     
 }

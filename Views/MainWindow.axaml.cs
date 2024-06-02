@@ -9,8 +9,6 @@ namespace MidiFlowy.Views;
 
 public partial class MainWindow : Window
 {
-    public List<InputDevice> InputDevices;
-    
     public MainWindow()
     {
         InitializeComponent();
