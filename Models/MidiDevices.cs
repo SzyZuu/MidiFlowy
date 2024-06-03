@@ -10,7 +10,14 @@ public class MidiDevices
     private List<InputDevice> _inputDevices = new();
     private List<OutputDevice> _outputDevices = new();
 
+    public bool NoMidiDevices;
+
     private InputDevice? _selectedDevice;
+
+    public MidiDevices()
+    {
+        NoMidiDevices = !_inputDevices.Any();
+    }
 
     public IEnumerable<InputDevice> FindAllInputDevices()
     {
@@ -34,12 +41,13 @@ public class MidiDevices
 
     public InputDevice GetSelectedInput()
     {
-        if (_selectedDevice is null)
+        if (_selectedDevice is null && !NoMidiDevices)
         {
             _selectedDevice = _inputDevices[0];
-        }
-
-        return _selectedDevice;
+            return _selectedDevice;
+        } 
+        
+        return _selectedDevice = null;
     }
 
     public void SetInput(InputDevice input)
