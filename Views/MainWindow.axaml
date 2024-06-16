@@ -12,6 +12,9 @@
         ExtendClientAreaToDecorationsHint="True"
         Icon="/Assets/avalonia-logo.ico"
         Title="MidiFlowy">
+    <Window.DataContext>
+        <vm:MainWindowViewModel />
+    </Window.DataContext>
     
     <StackPanel>
             <TextBlock
