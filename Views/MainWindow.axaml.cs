@@ -25,16 +25,7 @@ public partial class MainWindow : Window
 
     private void GetViewModel()
     {
-        _vm = this.DataContext as MainWindowViewModel/* ?? new MainWindowViewModel()*/;
-        if (_vm is null)
-        {
-            Console.Write("Nopeth, new vm");
-            _vm = new MainWindowViewModel();
-        }
-        else
-        {
-            Console.Write("We diddit");
-        }
+        _vm = this.DataContext as MainWindowViewModel ?? new MainWindowViewModel();
     }
 
     private void InputDropdown_OnSelectionChanged(object? sender, SelectionChangedEventArgs e)
