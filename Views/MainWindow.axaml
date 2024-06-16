@@ -12,15 +12,8 @@
         ExtendClientAreaToDecorationsHint="True"
         Icon="/Assets/avalonia-logo.ico"
         Title="MidiFlowy">
-
-    <Design.DataContext>
-        <vm:MainWindowViewModel/>
-    </Design.DataContext>
-    <UserControl.DataContext>
-        <vm:MainWindowViewModel/>
-    </UserControl.DataContext>
     
-        <StackPanel>
+    <StackPanel>
             <TextBlock
                 Margin="10, 20, 10, 10"
                 Text="{Binding Greeting}"
@@ -43,7 +36,8 @@
                 <ComboBox Name="InputDropdown" Margin="20" Width="200" Grid.Row="1" Grid.Column="0"
                           MaxDropDownHeight="200" HorizontalAlignment="Center"
                           ItemsSource="{Binding InputDevices}"
-                          SelectedItem="{Binding SelectedDevice}">
+                          SelectedItem="{Binding SelectedDevice}"
+                          SelectionChanged="InputDropdown_OnSelectionChanged">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding Name}"/>

@@ -12,28 +12,24 @@ public class MainWindowViewModel : ViewModelBase
 {
     public string Greeting => "MidiFlowy";
     public InputDevice SelectedDevice { get; set; }
-    private MidiDevices _midiDevices = new();
-    private ObservableCollection<InputDevice> _inputDevices;
+    public MidiViewModel MidiViewModel { get; }
 
     public MainWindowViewModel()
     {
-        _inputDevices = new ObservableCollection<InputDevice>();
-        var midiDeviceRefresher = new MidiDeviceRefresherService(_midiDevices);
-        midiDeviceRefresher.RefreshAll();
+        MidiViewModel = new MidiViewModel();
         LoadInputDevices();
-
-        SelectedDevice = _midiDevices.GetSelectedInput();
+        SelectedDevice = MidiViewModel.MidiDevices.GetSelectedInput();
     }
 
     public ObservableCollection<InputDevice> InputDevices
     {
-        get => _inputDevices;
-        set => this.RaiseAndSetIfChanged(ref _inputDevices, value);
+        get => MidiViewModel.InputDevices;
+        set => this.RaiseAndSetIfChanged(ref MidiViewModel.InputDevices, value);
     }
 
     private void LoadInputDevices()
     {
-        foreach (var device in _midiDevices.FindAllInputDevices())
+        foreach (var device in MidiViewModel.MidiDevices.FindAllInputDevices())
         {
             InputDevices.Add(device);
         }
