@@ -11,25 +11,29 @@ namespace MidiFlowy.ViewModels;
 public class MainWindowViewModel : ViewModelBase
 {
     public string Greeting => "MidiFlowy";
+    public MidiDevicesModel MidiDevicesModel = new();
     public InputDevice SelectedDevice { get; set; }
-    public MidiViewModel MidiViewModel { get; }
+    private ObservableCollection<InputDevice> _inputDevices;
 
     public MainWindowViewModel()
     {
-        MidiViewModel = new MidiViewModel();
+        _inputDevices = new ObservableCollection<InputDevice>();
+        var midiDeviceRefresher = new MidiDeviceRefresherService(MidiDevicesModel);
+        midiDeviceRefresher.RefreshAll();
+     
         LoadInputDevices();
-        SelectedDevice = MidiViewModel.MidiDevicesModel.GetSelectedInput();
+        SelectedDevice = MidiDevicesModel.GetSelectedInput();
     }
 
     public ObservableCollection<InputDevice> InputDevices
     {
-        get => MidiViewModel.InputDevices;
-        set => this.RaiseAndSetIfChanged(ref MidiViewModel.InputDevices, value);
+        get => _inputDevices;
+        set => this.RaiseAndSetIfChanged(ref _inputDevices, value);
     }
 
     private void LoadInputDevices()
     {
-        foreach (var device in MidiViewModel.MidiDevicesModel.FindAllInputDevices())
+        foreach (var device in MidiDevicesModel.FindAllInputDevices())
         {
             InputDevices.Add(device);
         }
