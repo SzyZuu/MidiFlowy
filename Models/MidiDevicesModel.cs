@@ -5,7 +5,7 @@ using Melanchall.DryWetMidi.Multimedia;
 
 namespace MidiFlowy.Models;
 
-public class MidiDevices
+public class MidiDevicesModel
 {
     private List<InputDevice> _inputDevices = new();
     private List<OutputDevice> _outputDevices = new();
@@ -14,7 +14,7 @@ public class MidiDevices
 
     private InputDevice? _selectedDevice;
 
-    public MidiDevices()
+    public MidiDevicesModel()
     {
         NoMidiDevices = !_inputDevices.Any();
     }

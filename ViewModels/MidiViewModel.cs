@@ -7,13 +7,13 @@ namespace MidiFlowy.ViewModels;
 
 public class MidiViewModel : ViewModelBase
 {
-    public MidiDevices MidiDevices = new();
+    public MidiDevicesModel MidiDevicesModel = new();
     public ObservableCollection<InputDevice> InputDevices;
 
     public MidiViewModel()
     {
         InputDevices = new ObservableCollection<InputDevice>();
-        var midiDeviceRefresher = new MidiDeviceRefresherService(MidiDevices);
+        var midiDeviceRefresher = new MidiDeviceRefresherService(MidiDevicesModel);
         midiDeviceRefresher.RefreshAll();
     }
 }

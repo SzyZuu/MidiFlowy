@@ -5,16 +5,16 @@ namespace MidiFlowy.Services;
 
 public class MidiDeviceRefresherService
 {
-    private MidiDevices _midiDevices;
+    private MidiDevicesModel _midiDevicesModel;
 
-    public MidiDeviceRefresherService(MidiDevices midiDevices)
+    public MidiDeviceRefresherService(MidiDevicesModel midiDevicesModel)
     {
-        _midiDevices = midiDevices;
+        _midiDevicesModel = midiDevicesModel;
     }
 
     public void RefreshAll()
     {
-        _midiDevices.AddInput(InputDevice.GetAll());
-        _midiDevices.AddOutput(OutputDevice.GetAll());
+        _midiDevicesModel.AddInput(InputDevice.GetAll());
+        _midiDevicesModel.AddOutput(OutputDevice.GetAll());
     }
 }

@@ -18,7 +18,7 @@ public class MainWindowViewModel : ViewModelBase
     {
         MidiViewModel = new MidiViewModel();
         LoadInputDevices();
-        SelectedDevice = MidiViewModel.MidiDevices.GetSelectedInput();
+        SelectedDevice = MidiViewModel.MidiDevicesModel.GetSelectedInput();
     }
 
     public ObservableCollection<InputDevice> InputDevices
@@ -29,7 +29,7 @@ public class MainWindowViewModel : ViewModelBase
 
     private void LoadInputDevices()
     {
-        foreach (var device in MidiViewModel.MidiDevices.FindAllInputDevices())
+        foreach (var device in MidiViewModel.MidiDevicesModel.FindAllInputDevices())
         {
             InputDevices.Add(device);
         }
