@@ -30,6 +30,7 @@ public partial class MainWindow : Window
 
     private void InputDropdown_OnSelectionChanged(object? sender, SelectionChangedEventArgs e)
     {
-        throw new System.NotImplementedException();
+        _vm.SelectedDevice = (InputDevice)e.AddedItems[0] ?? throw new InvalidOperationException();
+        Console.Write("Changed to: " + _vm.SelectedDevice.Name );
     }
 }
