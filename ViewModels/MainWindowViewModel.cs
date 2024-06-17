@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using Melanchall.DryWetMidi.Multimedia;
@@ -37,5 +38,12 @@ public class MainWindowViewModel : ViewModelBase
         {
             InputDevices.Add(device);
         }
+    }
+
+    public void NewDeviceSelected(InputDevice newSelected)
+    {
+        Console.WriteLine("New Selected Device in ComboBox: " + newSelected.Name);
+        MidiDevicesModel.SetInput(newSelected);
+        SelectedDevice = MidiDevicesModel.GetSelectedInput();
     }
 }

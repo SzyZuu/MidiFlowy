@@ -30,7 +30,18 @@ public partial class MainWindow : Window
 
     private void InputDropdown_OnSelectionChanged(object? sender, SelectionChangedEventArgs e)
     {
-        _vm.SelectedDevice = (InputDevice)e.AddedItems[0] ?? throw new InvalidOperationException();
-        Console.Write("Changed to: " + _vm.SelectedDevice.Name );
+        if (e.AddedItems.Count > 0)
+        {
+            if (_vm is not null)
+            {
+                _vm.NewDeviceSelected((InputDevice)e.AddedItems[0]);
+                Console.WriteLine("Changed to: " + _vm.SelectedDevice.Name);
+            }
+            else
+            {
+                Console.WriteLine("ViewModel not initialized");
+            }
+        }else
+            Console.WriteLine("No Items added");
     }
 }
