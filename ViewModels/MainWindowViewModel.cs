@@ -14,15 +14,19 @@ public class MainWindowViewModel : ViewModelBase
     public string Greeting => "MidiFlowy";
     public MidiDevicesModel MidiDevicesModel = new();
     public InputDevice SelectedDevice { get; set; }
+    public OutputDevice[] SelectedOutputDevices { get; set; }
     private ObservableCollection<InputDevice> _inputDevices;
+    private ObservableCollection<OutputDevice> _outputDevices;
 
     public MainWindowViewModel()
     {
         _inputDevices = new ObservableCollection<InputDevice>();
+        _outputDevices = new ObservableCollection<OutputDevice>();
+        
         var midiDeviceRefresher = new MidiDeviceRefresherService(MidiDevicesModel);
         midiDeviceRefresher.RefreshAll();
      
-        LoadInputDevices();
+        LoadMidiDevices();
         SelectedDevice = MidiDevicesModel.GetSelectedInput();
     }
 
@@ -31,12 +35,23 @@ public class MainWindowViewModel : ViewModelBase
         get => _inputDevices;
         set => this.RaiseAndSetIfChanged(ref _inputDevices, value);
     }
+    
+    public ObservableCollection<OutputDevice> OutputDevices
+    {
+        get => _outputDevices;
+        set => this.RaiseAndSetIfChanged(ref _outputDevices, value);
+    }
 
-    private void LoadInputDevices()
+    private void LoadMidiDevices()
     {
         foreach (var device in MidiDevicesModel.FindAllInputDevices())
         {
             InputDevices.Add(device);
+        }
+
+        foreach (var device in MidiDevicesModel.FindAllOutputDevices())
+        {
+            OutputDevices.Add(device);
         }
     }
 
@@ -45,5 +60,11 @@ public class MainWindowViewModel : ViewModelBase
         Console.WriteLine("New Selected Device in ComboBox: " + newSelected.Name);
         MidiDevicesModel.SetInput(newSelected);
         SelectedDevice = MidiDevicesModel.GetSelectedInput();
+    }
+
+    public void NewOutputDeviceSelected(OutputDevice newSelected)
+    {
+        Console.WriteLine("New Output Device Selected in ListBox: " + newSelected.Name);
+        MidiDevicesModel.AddSelectedOutput(newSelected);
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using DynamicData;
 using Melanchall.DryWetMidi.Multimedia;
 
 namespace MidiFlowy.Models;
@@ -11,6 +12,7 @@ public class MidiDevicesModel
     private List<OutputDevice> _outputDevices = new();
 
     private InputDevice? _selectedDevice;
+    private List<OutputDevice> _selectedOutputDevices = new();
 
     private bool NoMidiDevices()
     { 
@@ -55,5 +57,13 @@ public class MidiDevicesModel
     public void SetInput(InputDevice input)
     {
         _selectedDevice = input;
+    }
+
+    public void AddSelectedOutput(OutputDevice output)
+    {
+        if (!_selectedOutputDevices.Contains(output))
+        {
+            _selectedOutputDevices.Add(output);
+        }
     }
 }

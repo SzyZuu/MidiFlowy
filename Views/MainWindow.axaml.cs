@@ -44,4 +44,20 @@ public partial class MainWindow : Window
         }else
             Console.WriteLine("No Items added");
     }
+
+    private void OutputSelection_OnSelectionChanged(object? sender, SelectionChangedEventArgs e)
+    {
+        if (e.AddedItems.Count > 0)
+        {
+            if (_vm is not null)
+            {
+                _vm.NewOutputDeviceSelected((OutputDevice)e.AddedItems[0]);
+            }
+            else
+            {
+                Console.WriteLine("ViewModel not initialized");
+            }
+        }else
+            Console.WriteLine("No Items added");
+    }
 }
