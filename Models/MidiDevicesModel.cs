@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using DynamicData;
 using Melanchall.DryWetMidi.Multimedia;
 
 namespace MidiFlowy.Models;
@@ -64,6 +63,15 @@ public class MidiDevicesModel
         if (!_selectedOutputDevices.Contains(output))
         {
             _selectedOutputDevices.Add(output);
+        }
+    }
+
+    public void RemoveOutput(OutputDevice outputToRemove)
+    {
+        if (_selectedOutputDevices.Contains(outputToRemove))
+        {
+            _selectedOutputDevices.Remove(outputToRemove);
+            Console.WriteLine("Removed device");
         }
     }
 }

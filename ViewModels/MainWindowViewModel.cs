@@ -67,4 +67,10 @@ public class MainWindowViewModel : ViewModelBase
         Console.WriteLine("New Output Device Selected in ListBox: " + newSelected.Name);
         MidiDevicesModel.AddSelectedOutput(newSelected);
     }
+
+    public void OutputDeviceRemoved(OutputDevice removedDevice)
+    {
+        Console.WriteLine("Removing device: " + removedDevice.Name);
+        MidiDevicesModel.RemoveOutput(removedDevice);
+    }
 }

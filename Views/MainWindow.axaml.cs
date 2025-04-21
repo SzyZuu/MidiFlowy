@@ -30,34 +30,35 @@ public partial class MainWindow : Window
 
     private void InputDropdown_OnSelectionChanged(object? sender, SelectionChangedEventArgs e)
     {
+        if (_vm is null)
+        {
+            Console.WriteLine("ViewModel not initialized");
+            return;
+        }
+
         if (e.AddedItems.Count > 0)
         {
-            if (_vm is not null)
-            {
-                _vm.NewDeviceSelected((InputDevice)e.AddedItems[0]);
-                Console.WriteLine("Changed to: " + _vm.SelectedDevice.Name);
-            }
-            else
-            {
-                Console.WriteLine("ViewModel not initialized");
-            }
-        }else
-            Console.WriteLine("No Items added");
+            _vm.NewDeviceSelected((InputDevice)e.AddedItems[0]);
+            Console.WriteLine("Changed to: " + _vm.SelectedDevice.Name);
+        }
     }
 
     private void OutputSelection_OnSelectionChanged(object? sender, SelectionChangedEventArgs e)
     {
-        if (e.AddedItems.Count > 0)
+        if (_vm is null)
         {
-            if (_vm is not null)
-            {
-                _vm.NewOutputDeviceSelected((OutputDevice)e.AddedItems[0]);
-            }
-            else
-            {
-                Console.WriteLine("ViewModel not initialized");
-            }
-        }else
-            Console.WriteLine("No Items added");
+            Console.WriteLine("ViewModel not initialized");
+            return;
+        }
+        
+        if (e.AddedItems.Count > 0)
+        {            
+            Console.WriteLine("Items added");
+            _vm.NewOutputDeviceSelected((OutputDevice)e.AddedItems[0]);
+        }else if (e.RemovedItems.Count > 0)
+        {
+            Console.WriteLine("Items removed");
+            _vm.OutputDeviceRemoved((OutputDevice)e.RemovedItems[0]);
+        }
     }
 }
