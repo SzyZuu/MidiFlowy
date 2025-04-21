@@ -53,6 +53,15 @@ public class MidiDevicesModel
         return _selectedDevice;
     }
 
+    public OutputDevice[] GetSelectedOutputs()
+    {
+        if (!NoMidiDevices() && _selectedOutputDevices.Count > 0)
+        {
+            return _selectedOutputDevices.ToArray();
+        }
+        return null;
+    }
+
     public void SetInput(InputDevice input)
     {
         _selectedDevice = input;
