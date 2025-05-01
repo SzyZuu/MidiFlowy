@@ -48,17 +48,30 @@
                     </ComboBox.ItemTemplate>
                 </ComboBox>
                 
-                <ListBox Name="OutputSelection" Margin="20" Grid.Row="1" Grid.Column="1"
-                         Height="200"
-                         SelectionMode="Multiple,Toggle"
-                         ItemsSource="{Binding OutputDevices}"
-                         SelectionChanged="OutputSelection_OnSelectionChanged">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Name}"/>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
+                <StackPanel Grid.Row="1" Grid.Column="1">
+                    <ListBox Name="OutputSelection" Margin="20"
+                             Height="150"
+                             SelectionMode="Multiple,Toggle"
+                             ItemsSource="{Binding OutputDevices}"
+                             SelectionChanged="OutputSelection_OnSelectionChanged">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Name}"/>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    
+                    <StackPanel Orientation="Horizontal" Margin="20, 0, 0, 0" Spacing="5">
+                        <TextBox Watermark="Enter device name" Width="219"/>
+                        
+                        <Button>
+                            <PathIcon Width="15" Height="15" Data="{StaticResource add_regular}"/>
+                        </Button>
+                        <Button>
+                            <PathIcon Width="15" Height="15" Data="{StaticResource remove_regular}"/>
+                        </Button>
+                    </StackPanel>
+                </StackPanel>
 
             </Grid>
         </StackPanel>
