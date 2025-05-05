@@ -28,6 +28,10 @@ public class DryWetMidiService
         foreach (var outputDevice in selectedOutputs)
         {
             outputDevice.PrepareForEventsSending();
+            outputDevice.EventSent += (sender, e) =>
+            {
+                Console.WriteLine($"Output from {outputDevice.Name}: {e.Event}");
+            };
         }
 
         if (_devicesConnector is not null)
@@ -39,7 +43,7 @@ public class DryWetMidiService
         
         selectedInput.EventReceived += (sender, e) =>
         {
-            Console.WriteLine($"Input: {e.Event}");
+            Console.WriteLine($"Input from {selectedInput.Name}: {e.Event}");
         };
     }
 }

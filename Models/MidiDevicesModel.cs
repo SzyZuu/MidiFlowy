@@ -83,4 +83,10 @@ public class MidiDevicesModel
             Console.WriteLine("Removed device");
         }
     }
+
+    public void ClearDevices()
+    {
+        _inputDevices.Clear();
+        _outputDevices.Clear();
+    }
 }

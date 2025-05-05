@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows.Input;
+using Melanchall.DryWetMidi.Core;
 using Melanchall.DryWetMidi.Multimedia;
 using MidiFlowy.Models;
 using MidiFlowy.Services;
@@ -12,22 +14,42 @@ namespace MidiFlowy.ViewModels;
 public class MainWindowViewModel : ViewModelBase
 {
     public string Greeting => "MidiFlowy";
+    private string? _deviceNameText;
     public MidiDevicesModel MidiDevicesModel = new();
     public InputDevice SelectedDevice { get; set; }
     public OutputDevice[] SelectedOutputDevices { get; set; }
     private ObservableCollection<InputDevice> _inputDevices;
     private ObservableCollection<OutputDevice> _outputDevices;
+    
     private DryWetMidiService _midiService;
+    private TeVirtualMidiService _virtualMidiService;
+    private MidiDeviceRefresherService _deviceRefresherService;
+    
+    public ICommand AddVirtualDeviceCommand { get; }
+    public ICommand RemoveVirtualDeviceCommand { get; }
 
     public MainWindowViewModel()
     {
+        _virtualMidiService = new TeVirtualMidiService();
         _midiService = new DryWetMidiService(MidiDevicesModel);
         _inputDevices = new ObservableCollection<InputDevice>();
         _outputDevices = new ObservableCollection<OutputDevice>();
         
-        var midiDeviceRefresher = new MidiDeviceRefresherService(MidiDevicesModel);
-        midiDeviceRefresher.RefreshAll();
+        _deviceRefresherService = new MidiDeviceRefresherService(MidiDevicesModel);
+        _deviceRefresherService.RefreshAll();
      
+        LoadMidiDevices();
+        SelectedDevice = MidiDevicesModel.GetSelectedInput();
+
+        AddVirtualDeviceCommand = ReactiveCommand.Create(AddVirtualDevice);
+        RemoveVirtualDeviceCommand = ReactiveCommand.Create(RemoveVirtualDevice);
+    }
+
+    private void RefreshDevices()
+    {
+        _inputDevices.Clear();
+        _outputDevices.Clear();
+        _deviceRefresherService.RefreshAll();
         LoadMidiDevices();
         SelectedDevice = MidiDevicesModel.GetSelectedInput();
     }
@@ -42,6 +64,12 @@ public class MainWindowViewModel : ViewModelBase
     {
         get => _outputDevices;
         set => this.RaiseAndSetIfChanged(ref _outputDevices, value);
+    }
+
+    public string? DeviceNameText
+    {
+        get => _deviceNameText;
+        set => this.RaiseAndSetIfChanged(ref _deviceNameText, value);
     }
 
     private void LoadMidiDevices()
@@ -80,5 +108,23 @@ public class MainWindowViewModel : ViewModelBase
         MidiDevicesModel.RemoveOutput(removedDevice);
         
         _midiService.Reload();
+    }
+
+    private void AddVirtualDevice()
+    {
+        if(DeviceNameText is not null && DeviceNameText.Length > 1)
+        {
+            _virtualMidiService.CreatePort(DeviceNameText);
+            RefreshDevices();
+        }
+    }
+    
+    private void RemoveVirtualDevice()
+    {
+        if(DeviceNameText is not null && DeviceNameText.Length > 1)
+        {
+            _virtualMidiService.RemovePort(DeviceNameText);
+            RefreshDevices();
+        }
     }
 }

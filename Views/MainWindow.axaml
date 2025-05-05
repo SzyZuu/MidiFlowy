@@ -62,12 +62,12 @@
                     </ListBox>
                     
                     <StackPanel Orientation="Horizontal" Margin="20, 0, 0, 0" Spacing="5">
-                        <TextBox Watermark="Enter device name" Width="219"/>
+                        <TextBox Text="{Binding DeviceNameText}" Watermark="Enter device name" Width="219"/>
                         
-                        <Button>
+                        <Button Command="{Binding AddVirtualDeviceCommand}">
                             <PathIcon Width="15" Height="15" Data="{StaticResource add_regular}"/>
                         </Button>
-                        <Button>
+                        <Button Command="{Binding RemoveVirtualDeviceCommand}">
                             <PathIcon Width="15" Height="15" Data="{StaticResource remove_regular}"/>
                         </Button>
                     </StackPanel>

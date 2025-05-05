@@ -14,6 +14,8 @@ public class MidiDeviceRefresherService
 
     public void RefreshAll()
     {
+        _midiDevicesModel.ClearDevices();
+        
         _midiDevicesModel.AddInput(InputDevice.GetAll());
         _midiDevicesModel.AddOutput(OutputDevice.GetAll());
     }
