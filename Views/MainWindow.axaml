@@ -70,6 +70,13 @@
                         <Button Command="{Binding RemoveVirtualDeviceCommand}">
                             <PathIcon Width="15" Height="15" Data="{StaticResource remove_regular}"/>
                         </Button>
+                        
+                        
+                        <Button Command="{Binding RefreshDevicesCommand}">
+                            R
+                        </Button>
+                        
+                        
                     </StackPanel>
                 </StackPanel>
 

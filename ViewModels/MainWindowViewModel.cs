@@ -16,7 +16,7 @@ public class MainWindowViewModel : ViewModelBase
     public string Greeting => "MidiFlowy";
     private string? _deviceNameText;
     public MidiDevicesModel MidiDevicesModel = new();
-    public InputDevice SelectedDevice { get; set; }
+    private InputDevice _selectedDevice;
     public OutputDevice[] SelectedOutputDevices { get; set; }
     private ObservableCollection<InputDevice> _inputDevices;
     private ObservableCollection<OutputDevice> _outputDevices;
@@ -27,6 +27,7 @@ public class MainWindowViewModel : ViewModelBase
     
     public ICommand AddVirtualDeviceCommand { get; }
     public ICommand RemoveVirtualDeviceCommand { get; }
+    public ICommand RefreshDevicesCommand { get; }
 
     public MainWindowViewModel()
     {
@@ -39,10 +40,10 @@ public class MainWindowViewModel : ViewModelBase
         _deviceRefresherService.RefreshAll();
      
         LoadMidiDevices();
-        SelectedDevice = MidiDevicesModel.GetSelectedInput();
 
         AddVirtualDeviceCommand = ReactiveCommand.Create(AddVirtualDevice);
         RemoveVirtualDeviceCommand = ReactiveCommand.Create(RemoveVirtualDevice);
+        RefreshDevicesCommand = ReactiveCommand.Create(RefreshDevices);
     }
 
     private void RefreshDevices()
@@ -51,7 +52,6 @@ public class MainWindowViewModel : ViewModelBase
         _outputDevices.Clear();
         _deviceRefresherService.RefreshAll();
         LoadMidiDevices();
-        SelectedDevice = MidiDevicesModel.GetSelectedInput();
     }
 
     public ObservableCollection<InputDevice> InputDevices
@@ -72,12 +72,19 @@ public class MainWindowViewModel : ViewModelBase
         set => this.RaiseAndSetIfChanged(ref _deviceNameText, value);
     }
 
+    public InputDevice SelectedDevice
+    {
+        get => _selectedDevice;
+        set => this.RaiseAndSetIfChanged(ref _selectedDevice, value);
+    }
+
     private void LoadMidiDevices()
     {
         foreach (var device in MidiDevicesModel.FindAllInputDevices())
         {
             InputDevices.Add(device);
         }
+        _selectedDevice = MidiDevicesModel.GetSelectedInput();
 
         foreach (var device in MidiDevicesModel.FindAllOutputDevices())
         {
@@ -89,7 +96,7 @@ public class MainWindowViewModel : ViewModelBase
     {
         Console.WriteLine("New Selected Device in ComboBox: " + newSelected.Name);
         MidiDevicesModel.SetInput(newSelected);
-        SelectedDevice = MidiDevicesModel.GetSelectedInput();
+        _selectedDevice = MidiDevicesModel.GetSelectedInput();
         
         _midiService.Reload();
     }
