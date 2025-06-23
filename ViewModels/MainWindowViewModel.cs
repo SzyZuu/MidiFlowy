@@ -113,6 +113,7 @@ public class MainWindowViewModel : ViewModelBase
     {
         Console.WriteLine("Removing device: " + removedDevice.Name);
         MidiDevicesModel.RemoveOutput(removedDevice);
+        removedDevice.Dispose();
         
         _midiService.Reload();
     }

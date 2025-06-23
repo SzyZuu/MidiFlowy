@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Melanchall.DryWetMidi.Multimedia;
 
 namespace MidiFlowy.Models;
@@ -84,7 +85,7 @@ public class MidiDevicesModel
         }
     }
 
-    public void ClearDevices()
+    public async Task ClearDevices()
     {
         _inputDevices.Clear();
         _outputDevices.Clear();
