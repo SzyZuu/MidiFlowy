@@ -127,7 +127,7 @@ namespace MidiFlowy.Services {
 
 
 
-	public class TeVirtualMIDI {
+	public class TeVirtualMIDI : IDisposable {
 
 		/* default size of sysex-buffer */
 		private const UInt32 TE_VM_DEFAULT_SYSEX_SIZE = 65535;
@@ -222,6 +222,22 @@ namespace MidiFlowy.Services {
 
 			}
 
+		}
+
+		public void Dispose() {
+
+			if (fInstance == IntPtr.Zero) {
+				return;
+			}
+
+			try {
+				shutdown();
+			}
+			finally {
+				virtualMIDIClosePort(fInstance);
+				fInstance = IntPtr.Zero;
+				GC.SuppressFinalize(this);
+			}
 		}
 
 

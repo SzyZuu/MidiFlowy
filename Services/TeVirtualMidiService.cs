@@ -33,7 +33,7 @@ public class TeVirtualMidiService
             return;
         }      
         
-        _ports[name].shutdown();
+        _ports[name].Dispose();
         _ports.Remove(name);
         Console.WriteLine("Port removed");
     }
